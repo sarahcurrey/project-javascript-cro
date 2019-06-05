@@ -58,6 +58,21 @@ try {
 } catch (e) {
   PJS.error('x/exclude-ie', e);
 }
+try {
+  (function () {
+    /**
+      Disables Optimizely on staging
+    */
+if (window.location.hostname !== 'generalassemb.ly') {
+      PJS.log("Staging detected; disabling Optimizely");
+      window.optimizely.push({
+        "type": "disable"
+      });
+    }
+  })();
+} catch (e) {
+  PJS.error('x/exclude-staging', e);
+}
 
 try {
   (function () {
